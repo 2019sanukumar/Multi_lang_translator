@@ -4,18 +4,27 @@ const mongoose=require('mongoose');
 const textSchema=new mongoose.Schema({
     id_num:{
         type:Number,
-        required:true,
+        // required:true,
         
     },
-    translated_lang:{
+    src_lang:{
         type:String,
         required:true,
     
 
     },
+    dest_lang:{
+        type:String,
+        required:true,
+
+    },
     translated_text:{
         type:String,
         required:true,
+    },
+    original_text:{
+        type:String,
+        required:true
     }
 
 });
