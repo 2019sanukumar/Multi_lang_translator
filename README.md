@@ -12,7 +12,10 @@ install google translate api
 npm install --save @iamtraction/google-translate
 ```
 
-make sure your sustem have mongodb installed.
+make sure your system have mongodb installed.
+
+
+
 install monogoose dependecies using
 
 ```bash
