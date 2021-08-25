@@ -107,7 +107,6 @@ app.get('/translate',  async function(req,res)
         if (response.err) { console.log('error');}
         else { 
           console.log(response.text)
-          id=id+1;
           let save_db=new Text({
             
             src_lang:src_lang,
@@ -164,40 +163,39 @@ app.get('/translate',  async function(req,res)
 
 
 
-app.get('/transleted-text',function(req,res)
-{
-  // res.send.json(200)
-  res.end(JSON.stringify({ text:translatedtext1 }));
-})
+// app.get('/transleted-text',function(req,res)
+// {
+//   // res.send.json(200)
+//   res.end(JSON.stringify({ text:translatedtext1 }));
+// })
 
 
+// let out=[];
+// function tempcahce()
+// {
 
-app.get('/text',function(req,res)
-{
+//   let arr=['en','hi','it'];
+//   for(var i=0;i<arr.length;i++)
+//   {
+//       let temp=arr[i];
+//       let translatedtext;
 
-let arr=['en','hi','it'];
-let out=[];
-for(var i=0;i<arr.length;i++)
-{
-    let temp=arr[i];
-    let translatedtext;
+//       translate(input, { from: 'auto', to:dest_lang }).then(res => {
+//         console.log(res.text); // OUTPUT: Je vous remercie
+//         translatedtext=res.text;
+//         out.push(translatedtext);
+//         console.log(translatedtext);
+//         // console.log(res.from.autoCorrected); // OUTPUT: true
+//         // console.log(res.from.text.value); // OUTPUT: [Thank] you
+//         // console.log(res.from.text.didYouMean); // OUTPUT: false
+//       }).catch(err => {
+//         console.error(err);
+//       });
+      
+//   }
+  
 
-    translate('Thank you', { from: 'auto', to: temp }).then(res => {
-      console.log(res.text); // OUTPUT: Je vous remercie
-      translatedtext=res.text;
-      out.push(translatedtext);
-      console.log(translatedtext);
-      // console.log(res.from.autoCorrected); // OUTPUT: true
-      // console.log(res.from.text.value); // OUTPUT: [Thank] you
-      // console.log(res.from.text.didYouMean); // OUTPUT: false
-    }).catch(err => {
-      console.error(err);
-    });
-    
-}
-res.end(out[0]);
-
-});
+// }
   
 
 
