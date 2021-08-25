@@ -30,6 +30,21 @@ this is the api which will return the value to target language
         translatedtext1=response.text;
       };
 ```
+## Restful API
+
+1.For sending the string to to be translated
+```http://localhost:8080/api/input
+```
+2.For sending the string current language
+```http://localhost:8080/api/from
+```
+3.For sending the string to to be translated in which language
+```http://localhost:8080/api/to
+```
+
+4.For getting  the response 
+```http://localhost:8080/translate
+```
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
