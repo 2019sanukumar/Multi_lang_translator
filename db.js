@@ -1,30 +1,14 @@
-const mysql=require('mysql');
+const mongoose=require('mongoose');
 
-const express=require('express');
-const app=express();
 
-const bodyparser=require('body-parser');
-app.use(bodyparser.json());
-const con=mysql.createConnection({
-  host:'localhost',
-  user:'root',
-  password:"password",
-  database:'trans',
-  insecureAuth : true,
-  multipleStatements:true
+mongoose.connect('mongodb://localhost:27017/traslator',{
   
+  useNewUrlParser:true,
+  useUnifiedTopology:true
+
+}).then(()=>{
+  console.log("Conectd to monodb");
+}).catch((e)=>{
+  console.log("error in connectingin db",e);
 });
-
-
-
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-  
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log("Table created");
-  });
-});
-
   

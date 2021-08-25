@@ -1,8 +1,10 @@
 const express=require('express');
-const mysql=require('mysql');
+// const mysql=require('mysql');
+const db=require('./db');
+const Text=require('./models');
 const translate = require('@iamtraction/google-translate');
-
 const app=express();
+const router = express.Router()
 const port=8080;
 // const db=require('./db');
 app.use(express.json());
@@ -11,39 +13,17 @@ app.use(express.json());
 
 
 
-const con=mysql.createConnection({
-  host:'localhost',
-  user:'root',
-  password:"password",
-  database:'trans',
-  insecureAuth : true,
-  multipleStatements:true
-  
-});
-
-
-
-// con.connect(function(err) {
-//   if (err) throw err;
-//   console.log("Connected!");
-//   var sql = "CREATE TABLE language (name VARCHAR(255), lang VARCHAR(255))";
-//   con.query(sql, function (err, result) {
-//     if (err) throw err;
-//     console.log("Table created");
-//   });
-// });
-
-
-// con.connect(function(err){
-//   if(err)
-//   {
-//     console.log("error",err);
-//     return;
-//   };
-  
-//     console.log("conndected to db");
+// const con=mysql.createConnection({
+//   host:'localhost',
+//   user:'root',
+//   password:"password",
+//   database:'trans',
+//   insecureAuth : true,
+//   multipleStatements:true
   
 // });
+
+
 
 
 app.get('/',(req,res)=>
@@ -51,6 +31,17 @@ app.get('/',(req,res)=>
   res.send('Home page jjj');
 
 });
+
+let input;
+
+
+app.post('/api/input',(req,res)=>{
+  input=req.body;
+  res.end(JSON.stringify({ input:input.input}));
+
+});
+
+
 let src;
 app.post('/api/from',(req,res)=>
 {
@@ -60,10 +51,46 @@ app.post('/api/from',(req,res)=>
   res.send('Home page from');
 
 });
+
+//api for taking input ,to which lang string will be translated
 app.post('/api/to',function(req,res){
   console.log(req.body);
   src=req.body;
   res.send('home to');
+});
+
+app.get('/fill',(req,res)=>{
+  let out=new Text({
+    id_num:2,
+    translated_lang:'eng',
+    translated_text:'thank you'
+
+  });
+  out.save();
+  console.log(out);
+  res.end(" inside the function");
+
+})
+//adding data to db
+
+//searching in db
+app.get('/find', async function(req,res){//cahnge it inot async await
+
+  let val;
+  const [data, err]=await Text.find({id_num:2});
+  if(data)
+  {
+    val=data;
+    console.log(data);
+  }
+  else{
+    console.log(err,'errr555555555555rrv');
+  }
+
+
+  console.log(val,"ffff");
+  res.end(val.stringify);
+
 });
 
 
@@ -72,10 +99,7 @@ let translatedtext1;
 
 app.get('/translate',  async function(req,res)
 {
-  // 
 
-
-  
     let response = await translate('Thank you', { from: 'auto', to: 'it' });
       if (response.err) { console.log('error');}
       else { 
@@ -107,10 +131,7 @@ app.get('/translate',  async function(req,res)
 
 
 
-  // }).catch(err => {
-  //   console.error(err);
-  // });
-  
+ 
   
 
   
