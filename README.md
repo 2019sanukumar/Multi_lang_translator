@@ -50,6 +50,24 @@ http://localhost:8080/api/to
 http://localhost:8080/translate
 ```
 
+
+## test cases 
+
+1.giving the text
+```bash
+"text":"hey this is multi language translator with cache"
+```
+
+2.giving the source language
+```bash
+"text":"ei"//code for english
+```
+3.giving the desetination language
+```bash
+"text":"hi"//code for hindi
+```
+
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
